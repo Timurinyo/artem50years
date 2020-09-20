@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    #myProgress {
+      border-radius: 16px;
+      width: 100%;
+      background-color: #E5E5E5;
+      padding: 0;
+      margin-top: 24px;
+      margin-bottom: 24px;
+
+    }
+
+    #myBar {
+      border-radius: 16px;
+      width: 10%;
+      height: 10px;
+      background-color: #00BA07;
+
+    }
+
+    .H1 {
+      font-family: "Open Sans";
+      font-weight: 600;
+      font-size: 32px;
+      color: #000000;
+      padding: 0;
+      margin: 0;
+    }
+
+    .H2 {
+      font-family: "Open Sans";
+      font-weight: 600;
+      font-size: 16px;
+      color: #000;
+      padding: 0;
+      margin-top: 4px;
+    }
+
+    .body {
+      font-family: "Open Sans";
+      font-weight: 400;
+      font-size: 16px;
+      color: #5E5E5E;
+      padding: 0;
+      margin-top: 4px;
+    }
+
+
+
+    .row {
+      display: flex;
+      height: 48px;
+    }
+
+    .column {
+      flex: 33.33%;
+      padding: 5px;
+    }
+
+    .center {
+      text-align: left;
+    }
+
+  </style>
+
+  <body>
+
+    <div id='gathered' class="H1">{{gathered}} грн</div>
+    <div class="body">собрано из 300 000 грн</div>
+
+    <div id="myProgress">
+      <div id="myBar"></div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <img src="{{ url_for('static', filename='uploads/volga.png') }}" alt="Snow" height=48px; style="width:fit">
+        <div class="center">
+          <div class="H2">
+            Волга
+          </div>
+          <div class="body">
+            30 000 грн
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <img src="{{ url_for('static', filename='uploads/Kangoo.png') }}" alt="Forest" height=48px; style="width:fit">
+        <div class="center">
+          <div class="H2">
+            Renault Kangoo
+          </div>
+          <div class="body">
+            150 000 грн
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <img src="{{ url_for('static', filename='uploads/l200.png') }}" alt="Mountains" height=48px; style="width:fit">
+        <div class="center">
+          <div class="H2">
+            Mitsubishi l200
+          </div>
+          <div class="body">
+            300 000 грн
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div>
+      <button onclick="move()">Click Me</button>
+    </div>
+    <script>
+  		var i = 0;
+      function move() {
+      	console.log('test2')
+        if (i == 0) {
+          i = 1;
+          var bar = document.getElementById("myBar");
+          var gathered = document.getElementById("gathered");
+          var width = 10;
+          var id = setInterval(frame, 10);
+
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+              i = 0;
+            } else {
+              width++;
+              bar.style.width = width + "%";
+              gathered.innerHTML = width + "грн";
+            }
+          }
+        }
+      }
+
+    </script>
+
+  </body>
+
+</html>

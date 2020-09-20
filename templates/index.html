@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
+
+#myProgress {
+        border-radius: 16px;
+        width: 100%;
+        background-color: #E5E5E5;
+        padding: 0;
+        margin-top: 24px;
+        margin-bottom: 24px;
+
+    }
+
+    #myBar {
+        border-radius: 16px;
+        width: 10%;
+        height: 10px;
+        background-color: #00BA07;
+
+    }
+
+    .H1 {
+        font-family: "Open Sans";
+        font-weight: 600;
+        font-size: 32px;
+        color: #000000;
+        padding: 0;
+        margin: 0;
+    }
+
+    .H2 {
+        font-family: "Open Sans";
+        font-weight: 600;
+        font-size: 16px;
+        color: #000;
+        padding: 0;
+        margin-top: 4px;
+    }
+
+    .body {
+        font-family: "Open Sans";
+        font-weight: 400;
+        font-size: 16px;
+        color: #5E5E5E;
+        padding: 0;
+        margin-top: 4px;
+    }
+
+
+
+    .row {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .column {
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        padding: 5px;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .wrapper {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-flow: row wrap;
+                flex-flow: row wrap;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        text-align: center;
+    }
+
+    .wrapper>* {
+        padding: 10px;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 100%;
+            -ms-flex: 1 100%;
+                flex: 1 100%;
+    }
+
+    .video {
+        -webkit-box-ordinal-group: 2;
+            -ms-flex-order: 1;
+                order: 1;
+        -webkit-box-flex: 2;
+        -webkit-flex: 2;
+            -ms-flex: 2;
+                flex: 2;
+        min-height: 320px;
+    }
+
+    .support {
+        -webkit-box-ordinal-group: 3;
+            -ms-flex-order: 2;
+                order: 2;
+    }
+
+    .button {
+        border: none;
+        background-color: #00BA07;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 16px;
+        width: 100%;
+        margin: 16px 0 16px 0;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+
+    .button:hover {
+        background-color: #009906;
+    }
+
+    .l200 {
+        margin-right: -30px;
+    }
+
+    .mainwrapper {
+        margin: 0 16px;
+    }
+
+    @media only screen and (min-width: 768px) {
+
+        /* For desktop: */
+        .mainwrapper {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+        
+        .support {
+            -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+        }
+
+        .secondwrapper {
+            display: -ms-grid;
+            display: grid;
+            -ms-grid-columns: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
+</style>
+<body>
+    <div class="mainwrapper">
+        <div class="wrapper">
+            <h1 class="H1">Aвто на 50-летие</h1>
+            <p class="body">29 сентября моему папе Артему исполняется 50 лет. Последние 20 лет он ездит на восьмерке и мечтает о новом автомобиле.</p>
+        </div>
+        <div class="wrapper">
+            <iframe class="video" src="https://www.youtube.com/embed/byx1cjQDIRc" 
+                frameborder=0
+                allowfullscreen></iframe>
+
+            <div class="support">
+                <div id='gathered' class="H1 left">{{gathered}} грн</div>
+                <div class="body left">собрано из 300 000 грн</div>
+
+                <div id="myProgress">
+                <div id="myBar" {{progress_bar_style_width}}></div>
+                </div>
+                <div class="row">
+                    <div class="column left">
+                        <img src="{{ url_for('static', filename='uploads/volga.png') }}" alt="Snow" height=48px;
+                            style="width:fit">
+                        <div class="left">
+                            <div class="H2">
+                                Волга
+                            </div>
+                            <div class="body">
+                                30 000 грн
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column left">
+                        <img src="{{ url_for('static', filename='uploads/kangoo.png') }}" alt="Forest" height=48px;
+                            style="width:fit">
+                        <div class="left">
+                            <div class="H2">
+                                Renault Kangoo
+                            </div>
+                            <div class="body">
+                                150 000 грн
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column left l200">
+                        <img src="{{ url_for('static', filename='uploads/l200.png') }}" alt="Mountains" height=48px;
+                            style="width:fit">
+                        <div class="left">
+                            <div class="H2">
+                                Mitsubishi l200
+                            </div>
+                            <div class="body">
+                                300 000 грн
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="column left">
+                        <h1 class="H1">{{people_supported}}</h1>
+                        <div class="body">
+                            человек поддержало
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column left">
+                        <h1 class="H1">{{days_until_birthday}}</h1>
+                        <div class="body">
+                            дней до дня рождения
+                        </div>
+                    </div>
+                </div>
+                <button class="button H2"
+                    onclick="window.location.href='/support'">Поддержать</button>
+                <p class="body left">Нажав на кнопку ты сможешь поддержать Артема любой суммой отправив деньги на карту Monobank :)
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
