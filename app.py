@@ -7,7 +7,7 @@ import datetime
 locale.setlocale(locale.LC_ALL, '')
 
 TOKEN = '*'
-WHITE_CARD_ID = 'gsSGMNasjjQR_2BDIVOv3g'
+CARD_ID = 'gsSGMNasjjQR_2BDIVOv3g'
 
 FIRST_TIME = True
 
@@ -70,10 +70,10 @@ def home():
     time_difference = current_time - LAST_REQUEST_TIME
 
     if time_difference > REQUEST_PERIOD or FIRST_TIME:
-        gethered = get_account_balance(WHITE_CARD_ID)
+        gethered = get_account_balance(CARD_ID)
         BALANCE = gethered
 
-        descriptions, people_supported_amount = get_people_donated(WHITE_CARD_ID, START_DONATION_DATE)
+        descriptions, people_supported_amount = get_people_donated(CARD_ID, START_DONATION_DATE)
 
         PEOPLE_DONATED_AMOUNT = people_supported_amount
 
