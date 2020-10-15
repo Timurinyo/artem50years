@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve app
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+
+WorkingDirectory=/home/ubuntu/deployedapp2/app
+ExecStart=/home/ubuntu/deployedapp2/artem50env/bin/gunicorn --workers 1 --bind unix:app.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
