@@ -243,11 +243,7 @@
                 <p class="body left">
                 </p>
             </div>
-        </div>
-        <div class="wrapper">
-            <p class="body left"> {{ supporters_names }} </p>
-        </div>
-    </div>
+        </div>    </div>
 
 </body>
 

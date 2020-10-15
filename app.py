@@ -15,6 +15,7 @@ UPLOAD_FOLDER = 'static/uploads'
 
 BALANCE = 0
 PEOPLE_DONATED = 0
+PEOPLE_DONATED_NAMES = ''
 START_DONATION_DATE = datetime.datetime(2020, 9, 13)
 LAST_REQUEST_TIME = 0
 
@@ -43,12 +44,19 @@ def get_people_donated(card_id, since, to=datetime.datetime.now()):
     try:
         statements = mono.get_statements(card_id, since, to)
         peoples_donated = 0
+        descriptions = []
         for statement in statements:
             if statement['amount'] > 0:
                 peoples_donated += 1
+                descriptions.append(statement['description'])
     except:
         peoples_donated = 0
-    return peoples_donated
+    return descriptions, peoples_donated
+
+def format_descriptions(descriptions):
+    filtered_descriptions = [d.lstrip('Від: ') for d in descriptions if d != 'З гривневої картки']
+    filtered_descriptions.append('Илья Елагин')
+    return filtered_descriptions
 
 @app.route("/")
 def home():
@@ -56,29 +64,38 @@ def home():
     global LAST_REQUEST_TIME
     global BALANCE
     global PEOPLE_DONATED
+    global PEOPLE_DONATED_NAMES
 
     current_time = int(time.time())
     time_difference = current_time - LAST_REQUEST_TIME
     print(time_difference)
-    if time_difference > 61 or FIRST_TIME:
+    if time_difference > 121 or FIRST_TIME:
         gethered = get_account_balance(white_card_id)
         BALANCE = gethered
 
-        people_supported = get_people_donated(white_card_id, START_DONATION_DATE)
+        descriptions, people_supported = get_people_donated(white_card_id, START_DONATION_DATE)
+
         PEOPLE_DONATED = people_supported
+
+        supporters_names = format_descriptions(descriptions)
+        supporters_names_string = ', '.join(supporters_names)
+        PEOPLE_DONATED_NAMES = supporters_names_string
 
         LAST_REQUEST_TIME = int(time.time())
     else:
         gethered = BALANCE
         people_supported = PEOPLE_DONATED
-    
+        supporters_names_string = PEOPLE_DONATED_NAMES
+
     time_until_birthday = datetime.datetime(2020, 9, 29) - datetime.datetime.now()
-    days_until_birthday = time_until_birthday.days
+    days_until_birthday = time_until_birthday.days+1
+
+    gethered = gethered + 56240
 
     progress_bar_style_width = f"style=width:{(gethered / 300000)*100}%"
 
     FIRST_TIME = False
-    return render_template("index.html", gathered="{0:n}".format(gethered).replace(',', ' '), people_supported=people_supported, days_until_birthday=days_until_birthday, progress_bar_style_width=progress_bar_style_width)
+    return render_template("index.html", gathered="{0:n}".format(gethered).replace(',', ' '), people_supported=people_supported, days_until_birthday=days_until_birthday, progress_bar_style_width=progress_bar_style_width, supporters_names='Поздравили: ' + supporters_names_string)
 
 @app.route("/support")
 def support():
